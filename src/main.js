@@ -1,5 +1,7 @@
 // @ts-check
 
+require('dotenv').config()
+
 const app = require('./app')
 
 const PORT = 5000

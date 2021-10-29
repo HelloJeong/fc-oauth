@@ -10,6 +10,8 @@ app.set('view engine', 'pug')
 
 const userRouter = require('./routers/user')
 const mainRouter = require('./routers/main')
+const { verifyJWT } = require('./jwt')
+const { getUsersCollection } = require('./mongo')
 const setupPassportFBAuth = require('./passport-auth-fb')
 
 app.use(cookieParser())
@@ -18,6 +20,22 @@ app.use(async (req, res, next) => {
   const { access_token } = req.cookies
   if (access_token) {
     // TODO: implement here
+    try {
+      /** @type {string} */
+      const userId = await verifyJWT(access_token)
+      if (userId) {
+        const users = await getUsersCollection()
+        const user = await users.findOne({
+          id: userId,
+        })
+        if (user) {
+          // @ts-ignore
+          req.user = user
+        }
+      }
+    } catch (err) {
+      console.log(`Invalid token`, err)
+    }
   }
   next()
 })

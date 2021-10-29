@@ -4,7 +4,7 @@
   },
   "scripts": {
     "test": "jest",
-    "server": "nodemon src/main.js"
+    "start": "nodemon src/main.js"
   },
   "devDependencies": {
     "@types/node": "^15.0.0",
@@ -22,6 +22,7 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
     "jsonwebtoken": "^8.5.1",

@@ -18,11 +18,13 @@ function setupFBAuth(app) {
       {
         clientID: FB_APP_ID,
         clientSecret: FB_CLIENT_SECRET,
-        callbackURL: '', // TODO: Use correct callback URL
+        callbackURL:
+          'https://01ff-220-118-91-62.ngrok.io/passport/facebook/callback', // TODO: Use correct callback URL
       },
       (accessToken, refreshToken, profile, done) => {
         done(null, {
           facebook: {
+            // user info
             accessToken,
           },
         })
